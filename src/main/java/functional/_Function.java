@@ -1,7 +1,9 @@
 package functional;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
+//One input, one output
 public class _Function {
 
     public static void main(String[] args) {
@@ -15,8 +17,12 @@ public class _Function {
         System.out.println(multiply);
 
         Function<Integer, Integer> addBy1AndThenMultiplyBy10 = incrementByOneFunction.andThen(multiplyBy10Function);
-
         System.out.println(addBy1AndThenMultiplyBy10.apply(4));
+
+        //BiFunction example
+        System.out.println(incrementByOneAndMultiply(4, 100));
+        System.out.println(incrementByOneAndMultiplyFunction.apply(4, 100));
+
     }
 
     //Functional style. Same as increment method. 1 parameter, 1 return.
@@ -26,5 +32,13 @@ public class _Function {
 
     static int increment(int number) {
         return number + 1;
+    }
+
+    //Takes two arguments and return 1. Similar to Function
+    static BiFunction<Integer, Integer, Integer> incrementByOneAndMultiplyFunction =
+            (numberToIncrementByOne, numToMultiplyBy) -> (numberToIncrementByOne + 1) * numToMultiplyBy;
+
+    static int incrementByOneAndMultiply(int number, int numToMultiplyBy) {
+        return (number + 1) * numToMultiplyBy;
     }
 }
